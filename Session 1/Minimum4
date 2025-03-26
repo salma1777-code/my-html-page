@@ -1,0 +1,11 @@
+function min()
+{
+    let numbers = [1, 2, 3, 4, 5];
+    let numbers1 =[29, 2, 3, 4, 5];
+
+    let minimumValue = Math.min(...numbers);
+    let minimumValue1 = Math.min(...numbers1);
+    console.log(minimumValue);
+    console.log(minimumValue1);
+}
+min();

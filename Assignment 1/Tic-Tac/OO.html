@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tic-Tac-Two</title>
+
+        <style>
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+              }
+              
+              .row {
+                display: flex;
+                justify-content: center;
+              }
+              
+              .col {
+                width: 200px;
+                height: 200px;
+                border: 3px solid rgb(79, 92, 164);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 24px;
+                cursor: pointer;
+              }
+              
+              .result {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 20px;
+              }
+              
+              #result {
+                font-size: 32px;
+              }
+              
+              #board {
+                display: none;
+                line-height: 10px
+              }
+              
+              #board div {
+                margin: 10px 0;
+              }
+              
+              #reset {
+                margin-top: 10px;
+                padding: 8px 16px;
+                font-size: 16px;
+                cursor: pointer;
+                background-color: #878eb5;
+              }              
+        </style>
+    </head>
+    <body>
+        <div class="result">
+            <h1 id="result">Tic-Tac-Two</h1>
+            <button id="reset" onclick="reset()">Reset</button>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col" id="0" onclick="play(this.id)"></div>
+                <div class="col" id="1" onclick="play(this.id)"></div>
+                <div class="col" id="2" onclick="play(this.id)"></div>
+            </div>
+            <div class="row">
+                <div class="col" id="3" onclick="play(this.id)"></div>
+                <div class="col" id="4" onclick="play(this.id)"></div>
+                <div class="col" id="5" onclick="play(this.id)"></div>
+            </div>
+            <div class="row">
+                <div class="col" id="6" onclick="play(this.id)"></div>
+                <div class="col" id="7" onclick="play(this.id)"></div>
+                <div class="col" id="8" onclick="play(this.id)"></div>
+            </div>
+        </div>
+
+        <script>
+            var player = 1;
+            var moves = 0;
+            var win = false;
+            var board = ["", "", "", "", "", "", "", "", ""];
+            var winCombos = [
+                [0, 1, 2],
+                [3, 4, 5],
+                [6, 7, 8],
+                [0, 3, 6],
+                [1, 4, 7],
+                [2, 5, 8],
+                [0, 4, 8],
+                [2, 4, 6]
+            ];
+
+           
+            function play(id) {
+                if (win) {
+                    return;
+                }
+                var cell = document.getElementById(id);
+                if (cell.innerHTML === "") {
+                    var img = document.createElement('img');
+                    img.style.width = '80%';
+                    img.style.height = '80%';
+                    if (player === 1) {
+                        img.src = 'https://cdn.discordapp.com/attachments/1016624796118818909/1212671280273301534/Refki_Tac.jpg?ex=65f2af23&is=65e03a23&hm=69e82831ce6d755c1a40d48e58d6b1a746ab8be044eb55b75a8ed7b2b604412a&';
+                        board[id] = "X";
+                        player = 2;
+                    } else {
+                        img.src = 'https://cf-st.sc-cdn.net/aps_sharing/bolt_shared_media_links/aHR0cHM6Ly9ib2x0LWdjZG4uc2MtY2RuLm5ldC8zL3lrTWVxTWZQVWVsbUNyU2JOUzVwRj9ibz1FZzBhQUJvQU1nRjlTQUpRVldBQiZ1Yz04NQ._FMjpeg';
+                        board[id] = "O";
+                        player = 1;
+                    }
+                    cell.appendChild(img);
+                    moves++;
+                    if (moves >= 5) {
+                        checkWin();
+                    }
+                }
+            }
+            /*
+            function play(id) {
+                if (win) {
+                    return;
+                }
+                var cell = document.getElementById(id);
+                if (cell.innerHTML === "") {
+                    if (player === 1) {
+                        cell.innerHTML = "X";
+                        board[id] = "X";
+                        player = 2;
+                    } else {
+                        cell.innerHTML = "O";
+                        board[id] = "O";
+                        player = 1;
+                    }
+                    moves++;
+                    if (moves >= 5) {
+                        checkWin();
+                    }
+                }
+            }
+*/
+            function checkWin() {
+                for (var i = 0; i < winCombos.length; i++) {
+                    var combo = winCombos[i];
+                    var a = combo[0];
+                    var b = combo[1];
+                    var c = combo[2];
+                    if (board[a] !== "" && board[a] === board[b] && board[a] === board[c]) {
+                        win = true;
+                        document.getElementById("result").innerHTML = "Player " + board[a] + " wins!";
+                        var img = document.createElement('img');
+                        img.src = 'https://cdn.discordapp.com/attachments/1016624796118818909/1212671280273301534/Refki_Tac.jpg?ex=65f2af23&is=65e03a23&hm=69e82831ce6d755c1a40d48e58d6b1a746ab8be044eb55b75a8ed7b2b604412a&';
+                        document.body.appendChild(img);
+                        document.backgroundImage= img;
+                        }   
+                    }
+                }
+
+                
+                if (moves === 9) {
+                    document.getElementById("result").innerHTML = "It's a draw!";
+                }
+            
+
+            function reset() {
+                player = 1;
+                moves = 0;
+                win = false;
+                board = ["", "", "", "", "", "", "", "", ""];
+                document.getElementById("result").innerHTML = "Tic-Tac-Two";
+                var cells = document.getElementsByClassName("col");
+                for (var i = 0; i < cells.length; i++) {
+                    cells[i].innerHTML = "";
+                }
+            }
+
+
+            function endTheGame() {
+                var cells = document.getElementsByClassName("col");
+                for (var i = 0; i < cells.length; i++) {
+                    cells[i].removeAttribute("onclick");
+                }
+            }
+
+            function startTheGame() {
+                var cells = document.getElementsByClassName("col");
+                for (var i = 0; i < cells.length; i++) {
+                    cells[i].setAttribute("onclick", "play(this.id)");
+                }
+            }
+
+            function startGame() {
+                startTheGame();
+            }
+
+            function endGame() {
+                endTheGame();
+            }
+
+            function ShowResult() {
+                document.getElementById("result").innerHTML = "Player " + board[a] + " wins!";
+                if (win=== true) {
+                    document.getElementById('result').style.backgroundImage = "url('https://cdn.discordapp.com/attachments/1016624796118818909/1212671280273301534/Refki_Tac.jpg?ex=65f2af23&is=65e03a23&hm=69e82831ce6d755c1a40d48e58d6b1a746ab8be044eb55b75a8ed7b2b604412a&')";
+                }
+            }
+            </script>
+
+    </body>
+</html>
