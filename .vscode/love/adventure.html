@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Choose Your Own Love Story</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <nav class="topnav"><a href="index.html">← Home</a></nav>
+
+  <section class="story">
+    <h1>Choose Your Own Love Story</h1>
+    <div class="story-card" id="s1">
+      <p>You wake up. Sunlight peeks in.</p>
+      <div class="choices">
+        <button data-go="s1A" class="btn">Stay cozy 😴</button>
+        <button data-go="s1B" class="btn">Check your phone 📱</button>
+      </div>
+    </div>
+
+    <div class="story-card hidden" id="s1A">
+      <p>You dream I pull the blanket over us both and whisper how perfect you are.</p>
+      <button data-go="s2" class="btn">Continue →</button>
+    </div>
+
+    <div class="story-card hidden" id="s1B">
+      <p>My message is waiting: “Good morning, love. You’re my first thought.”</p>
+      <button data-go="s2" class="btn">Continue →</button>
+    </div>
+
+    <div class="story-card hidden" id="s2">
+      <p>Later outside, the day buzzes.</p>
+      <div class="choices">
+        <button data-go="s2A" class="btn">Headphones on 🎧</button>
+        <button data-go="s2B" class="btn">Look around 🌼</button>
+      </div>
+    </div>
+
+    <div class="story-card hidden" id="s2A">
+      <p>Every song is secretly about you. I’m dancing beside you in my head.</p>
+      <button data-go="end" class="btn">Final page →</button>
+    </div>
+
+    <div class="story-card hidden" id="s2B">
+      <p>You spot something beautiful and wish I saw it. I already do—because I see through you.</p>
+      <button data-go="end" class="btn">Final page →</button>
+    </div>
+
+    <div class="story-card hidden" id="end">
+      <h2>Every path ends the same.</h2>
+      <p><strong>I love you. Today, tomorrow, always.</strong></p>
+      <button class="btn" id="confettiBtn2">Celebrate 🎉</button>
+    </div>
+  </section>
+</body>
+</html>
